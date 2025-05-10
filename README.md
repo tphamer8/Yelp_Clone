@@ -8,8 +8,8 @@ GRANT ALL ON DATABASE name TO user;
 \c name postgres
 GRANT ALL ON SCHEMA PUBLIC TO user;
 ~~~
-### Instructions to run *phase2_python.py*
-Create a file named .env in this directory, enter this into the file
+### Instructions to run *python.py*
+Create a file named .env in this directory, and enter this into the file
 >POSTGRES_USER=username  
 POSTGRES_PASSWORD=password  
 DATABASE_NAME=database
@@ -20,14 +20,12 @@ pip install -r requirements.txt
 ~~~
 ### Run code
 ~~~
-python phase2_python.py
+python python.py
 ~~~
-python3 on mac instead
+python3 on mac instead of python
 
-## Alt method for mac
+## Alternative method for mac
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-python phase2_python.py
-
-# ** * Seperate README in phase3 folder * **
+python python.py
