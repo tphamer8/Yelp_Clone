@@ -33,6 +33,7 @@ public class YelpController {
     @FXML private ListView<String> categoryList;
     @FXML private ListView<String> attributeList;
     @FXML private Button searchButton;
+    @FXML private Button clearFilterButton;
     @FXML private TableView<Business> businessTable;
     @FXML private TableColumn<Business, String> nameColumn;
     @FXML private TableColumn<Business, String> addressColumn;
@@ -68,11 +69,21 @@ public class YelpController {
                         updateCities(newState);
                     }
                 });
+        cityComboBox.getSelectionModel()
+                        .selectedItemProperty()
+                        .addListener((observable, oldCity, newCity) -> {
+                            if (newCity != null) {
+                                updateAttributes(newCity);
+                                updateCategoriesCity(newCity);
+                            }
+                        });
         filterButton.setOnAction(event -> {
             updateCategoriesCity(cityComboBox.getSelectionModel().getSelectedItem());
             updateAttributes(cityComboBox.getSelectionModel().getSelectedItem());
         });
-
+        clearFilterButton.setOnAction(event -> {
+            clearFilters();
+        });
         searchButton.setOnAction(event -> {searchBusiness();});
         businessTable.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
@@ -172,6 +183,15 @@ public class YelpController {
         }
         cityComboBox.setItems(cities);
         try { connection.close(); } catch (SQLException ex) { ex.printStackTrace(); }
+    }
+
+    private void clearFilters() {
+        categoryList.getSelectionModel().clearSelection();
+        attributeList.getSelectionModel().clearSelection();
+        stateComboBox.getSelectionModel().clearSelection();
+        cityComboBox.getSelectionModel().clearSelection();
+        wifiSelect.getSelectionModel().select("Any");
+        priceSelect.getSelectionModel().select("Any");
     }
 
     // Helper Function to get the categories

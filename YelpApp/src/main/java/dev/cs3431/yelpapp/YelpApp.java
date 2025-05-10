@@ -15,7 +15,7 @@ public class YelpApp extends Application {
             Scene scene = new Scene(fxmlLoader.load(), 1280, 960);
             scene.getStylesheets()
                     .add(getClass().getResource("/styles/styles.css").toExternalForm());
-            stage.setTitle("Hello!");
+            stage.setTitle("Yelp Application");
             stage.setScene(scene);
             stage.show();
         } catch (Exception ex) {

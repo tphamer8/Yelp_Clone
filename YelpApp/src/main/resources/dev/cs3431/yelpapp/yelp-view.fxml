@@ -46,7 +46,6 @@
                <TableColumn fx:id="longitudeColumn" prefWidth="100.0" text="Longitude" />
            </columns>
          </TableView>
-          <Button text="Yelp" />
       </VBox>
    </center>
    <left>
@@ -80,6 +79,14 @@
                      <VBox.margin>
                         <Insets left="2.0" right="2.0" />
                      </VBox.margin></Button>
+                  <Button fx:id="clearFilterButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="185.0" text="Clear Filter">
+                     <VBox.margin>
+                        <Insets left="2.0" right="2.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="3.0" top="3.0" />
+                     </padding>
+                  </Button>
                   <Label prefHeight="17.0" prefWidth="185.0" styleClass="subtitle-text" text="Categories">
                      <VBox.margin>
                         <Insets left="2.0" right="2.0" top="10.0" />
