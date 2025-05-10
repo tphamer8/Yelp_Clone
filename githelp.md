@@ -13,3 +13,4 @@ git commit -m "description of your changes"
 git pull origin main
 git push origin main
 ```
+## If git yells at you send a sc to me or ask GPT, be carefull
