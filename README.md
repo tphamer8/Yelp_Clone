@@ -55,7 +55,9 @@ python python.py
 python3 on mac instead of python
 
 ## Alternative method for mac
+~~~
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 python python.py
+~~~
