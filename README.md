@@ -1,4 +1,4 @@
-<h1>Yelp Application Clonet</h1>
+<h1>Yelp Application Clone</h1>
 <!-- ### [YouTube Demonstration](https://youtu.be/7eJexJVCqJo) -->
 <h2 style="color: darkblue;">Description</h2>
 This application queries the data on <a href="https://business.yelp.com/data/resources/open-dataset/">Yelp's Open Dataset</a> through a user-friendly interface designed on JavaFX. The app can search business by location, categories, and attributes, as well as query similar businesses to a selected company.
