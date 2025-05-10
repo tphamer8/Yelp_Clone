@@ -11,21 +11,20 @@ This application queries the data on <a href="https://business.yelp.com/data/res
 - <b>JavaFX</b>
 - <b>Datagrib</b>
 
+<h2>Design Process</h2>
+1. Design an Entity-Relation (ER) diagram based on the Yelp Dataset
+2. Created the Database and implemented relations of the ER Diagram into create tables
+3. Parsed the JSON data files into insert statements using Python scripts and loaded the database
+4. Programmed triggers, functions, and test queries, and ran them on the populated database
+5. Designed the application using JavaFX, Scene Builder, and CSS styling
+6. Used the implementations from step 4 to query and display the data
+
 <h2>Program walk-through:</h2>
-1. When a user joins the Discord server, they are prompted to verify their account by first typing "!verify" in the #verification channel
-<img src="https://imgur.com/Pt9Pe21.png" height="100%" width="100%" alt="Welcome/Verifcation Message"/>
-<br/>
-2. The bot retrieves the corresponding data from the Google Sheet, verifying the order number and email address.
-<img src="https://github.com/tphamer8/SLP_Discord_Bot/blob/main/SLP%20Bot%20Message%20Photo.jpg" height="100%" width="100%" alt="Welcome/Verifcation Message"/>
-<br/>
-3. If a match is found, the bot assigns the appropriate role to the user, granting access to the correct session channels. <br/>
-<br/>
-4. If there is no match, the bot informs the user of the issue, and the user doesn't obtain access to the channels.
-<br/>
-<br/>
-AWS Instance Hosting: To ensure the bot runs continuously, it is hosted on an AWS EC2 instance. This provides a scalable, reliable, and secure environment, allowing the bot to run 24/7 and handle multiple concurrent verification requests efficiently.
-<br/>
-<br/>
+
+
+
+
+
 
 ## Setup help
 ### Create Database
