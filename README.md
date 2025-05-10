@@ -38,6 +38,7 @@ GRANT ALL ON SCHEMA PUBLIC TO user;
 ~~~
 ### Instructions to run *python.py*
 Create a file named .env in this directory, and enter this into the file
+~~~
 >POSTGRES_USER=username  
 POSTGRES_PASSWORD=password  
 DATABASE_NAME=database
