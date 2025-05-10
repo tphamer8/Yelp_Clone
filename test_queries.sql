@@ -1,18 +1,14 @@
--- Task 3
 
--- Q1
--- Query 1 - 533 Outputs
 SELECT DISTINCT c.category
 FROM Business b
 JOIN Categories c ON b.business_id = c.business_id
 WHERE b.state = 'AZ' AND b.city = 'Scottsdale';
--- Query 2 - 37 Outputs
+
 SELECT DISTINCT ba.attribute
 FROM business b
 JOIN businessattributes ba ON ba.business_id = b.business_id
 WHERE b.state = 'AZ' AND b.city = 'Scottsdale';
 
--- Q2 -- Tested
 SELECT b.business_id, b.business_name, b.street_address, COUNT(t.tip_date) AS num_tips
 FROM Business b
 JOIN Categories c ON b.business_id = c.business_id
@@ -23,7 +19,6 @@ GROUP BY b.business_id, b.business_name, b.street_address
 HAVING COUNT(DISTINCT c.category) = 3
 ORDER BY b.business_name;
 
--- Q3 -- Tested num_tips different
 SELECT b.business_id, b.business_name, b.street_address, COUNT(t.tip_date) AS num_tips
 FROM Business b
 JOIN BusinessAttributes a ON b.business_id = a.business_id
@@ -38,7 +33,6 @@ GROUP BY b.business_id, b.business_name, b.street_address
 HAVING COUNT(DISTINCT a.attribute) = 3
 ORDER BY b.business_name;
 
--- Q4
 SELECT b.business_id, b.business_name, b.street_address, COUNT(t.tip_date) AS num_tips
 FROM Business b
 JOIN Categories c ON b.business_id = c.business_id
@@ -59,7 +53,6 @@ HAVING COUNT(DISTINCT c.category) = 3
     AND COUNT(DISTINCT a.attribute) = 3
 ORDER BY b.business_name;
 
--- Q5
 CREATE OR REPLACE FUNCTION count_categories(b1 CHAR(22), b2 CHAR(22))
 RETURNS INTEGER AS $$
 BEGIN
@@ -75,10 +68,9 @@ BEGIN
 			WHERE business_id = b2));
 END;
 $$ LANGUAGE plpgsql;
--- Test Example
+
 SELECT count_categories('iPPzDL_oY8SJCjmycuXcVg', 'ncXQtqJT5Gk1QztwTrBrgw');
 
--- Q6
 CREATE OR REPLACE FUNCTION geodistance(
     lat1 DOUBLE PRECISION, long1 DOUBLE PRECISION, lat2 DOUBLE PRECISION, long2 DOUBLE PRECISION
 )
@@ -96,10 +88,8 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Test Example
 SELECT geodistance(33.6399735577, -112.1334044052, 33.5796797, -111.9275444);
 
--- Q7
 WITH given_business AS (
     SELECT business_id, business_name, city, zipcode, latitude, longitude
     FROM Business
@@ -124,7 +114,6 @@ ORDER BY rank DESC
 LIMIT 15;
 
 
--- Q8
 SELECT b1.business_id, b1.business_name, b1.street_address, b1.num_tips
 FROM Business b1
 JOIN Categories c1 ON b1.business_id = c1.business_id
@@ -137,7 +126,6 @@ WHERE b1.zipcode =  '85251' AND c1.category = 'Restaurants'
 );
 
 
--- Q9
 SELECT u.name AS user_name, t1.tip_date AS tipdate, t1.text AS tiptext
 FROM Tip t1
 JOIN Users u ON t1.user_id = u.user_id
@@ -161,7 +149,6 @@ AND t1.tip_date =
 		FROM Friend
 		WHERE user1_id = 'TiWF94rl8Q6jqQf2YZSFPA'));
 
--- Q10
 SELECT *
 FROM (
     SELECT DISTINCT ON (t.user_id)
@@ -184,7 +171,6 @@ FROM (
 ) recent_tips
 ORDER BY tip_date DESC;
 
--- Q11
 CREATE OR REPLACE FUNCTION number_of_tips()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -204,16 +190,14 @@ AFTER INSERT ON Tip
 FOR EACH ROW
 EXECUTE FUNCTION number_of_tips();
 
---Test--
 DELETE FROM Tip WHERE business_id = 'gnKjwL_1w79qoiV3IC_xQQ' AND user_id = 'nRagjGVuSALgQ4KfGLn8Ig';
 INSERT INTO Tip (business_id, tip_date, likes, text, user_id)
 VALUES ('gnKjwL_1w79qoiV3IC_xQQ', '2025-04-23 10:42:30', 100, 'This business is cool!', 'nRagjGVuSALgQ4KfGLn8Ig');
--- Check increase
+
 SELECT num_tips, tips
 FROM business, users
 WHERE business_id = 'gnKjwL_1w79qoiV3IC_xQQ' AND user_id = 'nRagjGVuSALgQ4KfGLn8Ig';
 
--- Q12
 CREATE or REPLACE FUNCTION businessNotOpen()
 RETURNS TRIGGER AS $$
 DECLARE
@@ -242,6 +226,5 @@ BEFORE INSERT OR UPDATE ON Check_Ins
 FOR Each Row
 EXECUTE PROCEDURE businessNotOpen();
 
--- Test
 INSERT INTO Check_Ins (business_id, time_stamp)
 VALUES ('gnKjwL_1w79qoiV3IC_xQQ', '2025-04-23 22:00:00');

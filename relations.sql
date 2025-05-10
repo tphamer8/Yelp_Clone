@@ -77,10 +77,47 @@ CREATE TABLE Friend (
 
 CREATE TABLE Tip(
 	business_id CHAR(22),
-	tip_date DATE,
+	tip_date timestamp,
 	likes INTEGER,
 	text VARCHAR,
 	user_id CHAR(22),
     PRIMARY KEY (user_id, tip_date, business_id),
 	FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
+
+CREATE OR REPLACE FUNCTION geodistance(
+    lat1 DOUBLE PRECISION, long1 DOUBLE PRECISION, lat2 DOUBLE PRECISION, long2 DOUBLE PRECISION
+)
+RETURNS DOUBLE PRECISION AS $$
+DECLARE
+    R DOUBLE PRECISION := 3959; -- radius of Earth in miles
+    dLat DOUBLE PRECISION := radians(lat2 - lat1);
+    dLon DOUBLE PRECISION := radians(long2 - long1);
+    a DOUBLE PRECISION;
+    c DOUBLE PRECISION;
+BEGIN
+    a := POWER(sin(dLat / 2), 2) + cos(radians(lat1)) * cos(radians(lat2)) * POWER(sin(dLon / 2), 2);
+    c := 2 * atan2(sqrt(a), sqrt(1 - a));
+    RETURN R * c;
+END;
+$$ LANGUAGE plpgsql;
+CREATE OR REPLACE FUNCTION count_categories(b1 CHAR(22), b2 CHAR(22))
+RETURNS INTEGER AS $$
+DECLARE
+    result INTEGER;
+BEGIN
+    SELECT COUNT(*)
+    INTO result
+    FROM (
+        SELECT category
+        FROM Categories
+        WHERE business_id = b1
+        INTERSECT
+        SELECT category
+        FROM Categories
+        WHERE business_id = b2
+    ) AS subquery;
+
+    RETURN result;
+END;
+$$ LANGUAGE plpgsql;
